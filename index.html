@@ -1268,6 +1268,77 @@
       .hero-stat-num { font-size: 1.3rem; }
       .hero-stat-label { font-size: 0.7rem; }
     }
+
+    /* ========== GOOGLE REVIEWS SLIDER ========== */
+  .reviews-summary {
+    display: inline-flex; align-items: center; gap: 1rem;
+    background: var(--white); border: 1px solid var(--beige);
+    border-radius: 50px; padding: 0.6rem 1.4rem 0.6rem 0.8rem;
+    box-shadow: var(--shadow-sm); margin-top: 0.5rem;
+  }
+  .reviews-g {
+    width: 34px; height: 34px; border-radius: 50%; background: var(--cream);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .reviews-g svg { width: 18px; height: 18px; }
+  .reviews-score {
+    font-family: var(--font-serif); font-size: 1.9rem; font-weight: 700;
+    color: var(--green-deep); line-height: 1;
+  }
+  .reviews-meta { text-align: left; line-height: 1.3; }
+  .reviews-meta .testi-stars { margin-bottom: 0.1rem; }
+  .reviews-count { font-family: var(--font-heading); font-size: 0.78rem; color: var(--text-mid); font-weight: 500; }
+  .testi-card { display: flex; flex-direction: column; }
+  .testi-card .testi-text { flex: 1; }
+  .testi-card.featured { border-color: var(--gold-light); box-shadow: var(--shadow-md); }
+  .testi-link {
+    display: inline-block; margin-top: 1.1rem; padding-top: 0.9rem;
+    border-top: 1px solid var(--beige); font-family: var(--font-heading);
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; color: var(--gold);
+    transition: color 0.2s;
+  }
+  .testi-link:hover { color: var(--green-deep); }
+  .reviews-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.75rem; }
+  /* --- Reviews slider --- */
+  .reviews-slider { position: relative; }
+  .reviews-track {
+    display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory;
+    scroll-behavior: smooth; padding: 0.5rem 0.25rem 1.25rem;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .reviews-track::-webkit-scrollbar { display: none; }
+  .reviews-track .testi-card {
+    flex: 0 0 calc((100% - 3rem) / 3); scroll-snap-align: start; min-width: 0;
+  }
+  .reviews-nav {
+    display: flex; align-items: center; justify-content: center; gap: 1.25rem; margin-top: 1.25rem;
+  }
+  .reviews-arrow {
+    width: 46px; height: 46px; border-radius: 50%; cursor: pointer;
+    background: var(--white); border: 1.5px solid var(--green-deep); color: var(--green-deep);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s ease; box-shadow: var(--shadow-sm);
+  }
+  .reviews-arrow:hover { background: var(--green-deep); color: var(--white); transform: translateY(-2px); }
+  .reviews-arrow:disabled { opacity: 0.35; cursor: default; transform: none; background: var(--white); color: var(--green-deep); }
+  .reviews-arrow svg { width: 20px; height: 20px; }
+  .reviews-dots { display: flex; gap: 0.5rem; }
+  .reviews-dot {
+    width: 9px; height: 9px; border-radius: 50px; border: none; padding: 0; cursor: pointer;
+    background: var(--beige-dark); transition: all 0.25s ease;
+  }
+  .reviews-dot.active { width: 26px; background: var(--gold); }
+  @media (max-width: 900px) {
+    .reviews-track .testi-card { flex-basis: calc((100% - 1.5rem) / 2); }
+  }
+  @media (max-width: 600px) {
+    .reviews-track .testi-card { flex-basis: 88%; }
+  }
+  @media (max-width: 480px) {
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .reviews-actions { flex-direction: column; align-items: stretch; }
+    .reviews-actions .btn { justify-content: center; }
+  }
   </style>
 </head>
 <body>
@@ -1309,6 +1380,7 @@
           <a href="#services">Services</a>
           <a href="#gallery">Gallery</a>
           <a href="#specialties">Specialties</a>
+          <a href="#reviews">Reviews</a>
           <a href="#contact">Contact</a>
         </nav>
 
@@ -1333,6 +1405,7 @@
       <a href="#services">Services</a>
       <a href="#gallery">Gallery</a>
       <a href="#specialties">Specialties</a>
+          <a href="#reviews">Reviews</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -1815,8 +1888,8 @@
             <img src="Potrait family photo.png" alt="LumeraCare family" style="width:100%;height:100%;object-fit:cover;object-position:center center;" />
           </div>
           <div class="why-quote">
-            <div class="why-quote-text">"They treat my mother like their own family. I finally feel at peace knowing she is safe and loved."</div>
-            <div class="why-quote-attr">— Family of a LumeraCare Resident</div>
+            <div class="why-quote-text">"Knowing that my father is in such capable and caring hands gives me an incredible amount of peace of mind."</div>
+            <div class="why-quote-attr">— Hector, Family of a Resident</div>
           </div>
         </div>
       </div>
@@ -1844,6 +1917,160 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- ============ GOOGLE REVIEWS ============ -->
+  <section class="testimonials" id="reviews">
+    <div class="container">
+      <div class="testimonials-header">
+        <div class="section-label">What Families Are Saying</div>
+        <h2 class="section-title">Trusted by Families,<br>Loved Like Home.</h2>
+        <div class="reviews-summary">
+          <div class="reviews-g" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.3l7.9 6.2C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.8c4.3-4 6.9-9.9 6.9-17.2z"/><path fill="#FBBC05" d="M10.5 28.6c-.5-1.4-.8-3-.8-4.6s.3-3.2.8-4.6l-7.9-6.2C.9 16.6 0 20.2 0 24s.9 7.4 2.6 10.8l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.8c-2.1 1.4-4.8 2.3-8.5 2.3-6.3 0-11.6-4.2-13.5-10l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></svg>
+          </div>
+          <div class="reviews-score">5.0</div>
+          <div class="reviews-meta">
+            <div class="testi-stars" aria-label="5 out of 5 stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+            <div class="reviews-count">Based on 10 Google reviews</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reviews-slider" aria-roledescription="carousel" aria-label="Google reviews">
+      <div class="reviews-track" id="reviews-track">
+        <div class="testi-card featured">
+          <div class="testi-stars" aria-label="5 stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <p class="testi-text">"I honestly couldn't have found a better home for my father… Communication is excellent, and knowing that my father is in such capable and caring hands gives me an incredible amount of peace of mind. They even try to prepare his favorite meals."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">H</div>
+            <div><div class="testi-name">Hector</div><div class="testi-role">Family of a resident</div></div>
+          </div>
+          <a href="https://maps.google.com/?cid=16848809329576050554" target="_blank" rel="noopener" class="testi-link">Read on Google →</a>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars" aria-label="5 stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <p class="testi-text">"Beautiful, freshly remodeled home, involved owners who put time into getting to know my loved one and prepare for his needs, home-cooked meals to order."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">M</div>
+            <div><div class="testi-name">Mary</div><div class="testi-role">Family member</div></div>
+          </div>
+          <a href="https://maps.google.com/?cid=16848809329576050554" target="_blank" rel="noopener" class="testi-link">Read on Google →</a>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars" aria-label="5 stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <p class="testi-text">"What stands out the most is the level of care, compassion, and professionalism shown by the staff. They treat every resident with dignity, respect, and genuine kindness. Communication is always clear and transparent."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">G</div>
+            <div><div class="testi-name">Ges K.</div><div class="testi-role">Google reviewer</div></div>
+          </div>
+          <a href="https://maps.google.com/?cid=16848809329576050554" target="_blank" rel="noopener" class="testi-link">Read on Google →</a>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars" aria-label="5 stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <p class="testi-text">"The staff are incredibly kind, respectful, and genuinely care about the people they serve. The home is clean, well maintained, and filled with positive energy."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">K</div>
+            <div><div class="testi-name">Kenzhe E.</div><div class="testi-role">Google reviewer</div></div>
+          </div>
+          <a href="https://maps.google.com/?cid=16848809329576050554" target="_blank" rel="noopener" class="testi-link">Read on Google →</a>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars" aria-label="5 stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <p class="testi-text">"From the peaceful environment to the genuinely caring staff, everything feels warm and welcoming. The team is incredibly attentive, compassionate, and helpful, and they truly create a sense of comfort that feels like home."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">L</div>
+            <div><div class="testi-name">Lorenzo M.</div><div class="testi-role">Google reviewer</div></div>
+          </div>
+          <a href="https://maps.google.com/?cid=16848809329576050554" target="_blank" rel="noopener" class="testi-link">Read on Google →</a>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars" aria-label="5 stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <p class="testi-text">"The staff were kind and respectful, and the home was clean and comfortable. I appreciated the support I received during my time here. Thank you for making my stay a positive one!"</p>
+          <div class="testi-author">
+            <div class="testi-avatar">S</div>
+            <div><div class="testi-name">Sydney S.</div><div class="testi-role">Former resident</div></div>
+          </div>
+          <a href="https://maps.google.com/?cid=16848809329576050554" target="_blank" rel="noopener" class="testi-link">Read on Google →</a>
+        </div>
+      </div>
+        <div class="reviews-nav">
+          <button class="reviews-arrow" id="reviews-prev" aria-label="Previous review">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="reviews-dots" id="reviews-dots"></div>
+          <button class="reviews-arrow" id="reviews-next" aria-label="Next review">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="reviews-actions">
+        <a href="https://maps.google.com/?cid=16848809329576050554" target="_blank" rel="noopener" class="btn btn-outline">Read All Reviews on Google</a>
+        <a href="https://maps.google.com/?cid=16848809329576050554" target="_blank" rel="noopener" class="btn btn-gold">Leave Us a Review</a>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var track = document.getElementById('reviews-track');
+        if (!track) return;
+        var cards = track.querySelectorAll('.testi-card');
+        var prev = document.getElementById('reviews-prev');
+        var next = document.getElementById('reviews-next');
+        var dotsWrap = document.getElementById('reviews-dots');
+        var timer;
+
+        function perView() {
+          var w = cards[0].getBoundingClientRect().width;
+          return Math.max(1, Math.round(track.clientWidth / w));
+        }
+        function pages() { return Math.max(1, cards.length - perView() + 1); }
+        function current() {
+          var w = cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).gap || 0);
+          return Math.round(track.scrollLeft / w);
+        }
+        function goTo(i) {
+          var n = pages();
+          i = (i + n) % n;
+          track.scrollTo({ left: cards[i].offsetLeft - track.offsetLeft, behavior: 'smooth' });
+        }
+        function buildDots() {
+          dotsWrap.innerHTML = '';
+          for (var i = 0; i < pages(); i++) {
+            var d = document.createElement('button');
+            d.className = 'reviews-dot';
+            d.setAttribute('aria-label', 'Go to review ' + (i + 1));
+            d.addEventListener('click', (function (k) { return function () { goTo(k); restart(); }; })(i));
+            dotsWrap.appendChild(d);
+          }
+          update();
+        }
+        function update() {
+          var c = Math.min(current(), pages() - 1);
+          dotsWrap.querySelectorAll('.reviews-dot').forEach(function (d, i) { d.classList.toggle('active', i === c); });
+        }
+        function restart() {
+          clearInterval(timer);
+          timer = setInterval(function () { goTo(current() + 1); }, 6000);
+        }
+
+        prev.addEventListener('click', function () { goTo(current() - 1); restart(); });
+        next.addEventListener('click', function () { goTo(current() + 1); restart(); });
+        track.addEventListener('scroll', function () { window.requestAnimationFrame(update); });
+        track.addEventListener('mouseenter', function () { clearInterval(timer); });
+        track.addEventListener('mouseleave', restart);
+        track.addEventListener('touchstart', function () { clearInterval(timer); }, { passive: true });
+        window.addEventListener('resize', buildDots);
+
+        buildDots();
+        restart();
+      })();
+    </script>
   </section>
 
   <!-- ============ MAP SECTION ============ -->
@@ -2135,7 +2362,7 @@
     sections.forEach(s => observer.observe(s));
 
     // Animate cards on scroll
-    const cards = document.querySelectorAll('.trust-card, .service-card, .testi-card');
+    const cards = document.querySelectorAll('.trust-card, .service-card');
     const cardObs = new IntersectionObserver((entries) => {
       entries.forEach((e, i) => {
         if (e.isIntersecting) {
